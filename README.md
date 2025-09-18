@@ -85,17 +85,17 @@ Session-based authentication
 ##  Screenshots
 
 ### Login
-![Login Screenshot](docs/screenshots/beerlogin.png)
+![Login Screenshot](docs/beerlogin.png)
 
 ### Beer Search
-![Search Screenshot](docs/screenshots/busqueda.png)
+![Search Screenshot](docs/busqueda.png)
 
 ### Search Result
-![Result Screenshot](docs/screenshots/resultado.png)
+![Result Screenshot](docs/resultado.png)
 
 ### User Profile
-![Profile Screenshot](docs/screenshots/perfil.png)
+![Profile Screenshot](docs/perfil.png)
 
 ### Add Beer
-![Add Beer Screenshot](docs/screenshots/añadircerveza.png)
+![Add Beer Screenshot](docs/añadircerveza.png)
 
