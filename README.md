@@ -1,8 +1,6 @@
 # Community CraftBeer
 
-Community CraftBeer is a **Spring Boot + MySQL** web application that allows users to **search, rate, and share craft beers**.  
-This project was developed as part of my **Web Application Development (DAW) final project**.
-
+Community CraftBeer is a Java Spring Boot + MySQL web application designed for craft beer enthusiasts. Users can search and explore beers, add new entries, rate them with a star system, save favorites, and share their thoughts through publications.
 ---
 
 ## Tech Stack
@@ -64,19 +62,40 @@ Session-based authentication
 
 ## Features
 
--User authentication & authorization (Spring Security with manual config)
+-User authentication (Sping Security)
 
--Beer search: browse beers from the seed database
+-Posts/Publications: create and view user publications
+
+-Add new beers to the database via a form
+
+-Beer search: browse beers from the seed database (100 items)
 
 -Rating system: rate beers with a star-based score
 
 -Favorites: save beers to your personal list of favorites
 
--Sharing: send beers to other registered users
-
--Received beers: view beers shared with you by other users
-
--User profile: check your ratings and favorites
+-User profile: check your ratings, favorites, and publications
 
 -Responsive UI: optimized for desktop and mobile
+
+---
+
+##  Screenshots
+
+##  Screenshots
+
+### Login
+![Login Screenshot](docs/screenshots/beerlogin.png)
+
+### Beer Search
+![Search Screenshot](docs/screenshots/busqueda.png)
+
+### Search Result
+![Result Screenshot](docs/screenshots/resultado.png)
+
+### User Profile
+![Profile Screenshot](docs/screenshots/perfil.png)
+
+### Add Beer
+![Add Beer Screenshot](docs/screenshots/añadircerveza.png)
 
