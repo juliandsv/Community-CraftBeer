@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>resultado</title>
+</head>
+<body>
+    <header class="header">
+        <a href="inicio.html" >
+            <img class="header__logo" src="img/2.png" alt="logotipo">
+        </a>
+    </header>
+    <nav class="navegacion">
+        <ul>
+            <li><a class="navegacion__enlace navegacion__enlace--activo" href="/inicio">Inicio</a></li>
+            <li><a class="navegacion__enlace " href="/buscar">Buscar cerveza</a></li>
+            <li><a class="navegacion__enlace" href="/favoritas">Mis Favoritas</a></li>
+            <li><a class="navegacion__enlace" href="/perfil">Mi Perfil</a></li>
+			<li><a  class="navegacion__enlace" href="/nuevaCerveza">Añadir Cerveza</a></li>
+            <li><a class="navegacion__enlace" href="/logout">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+	<main>
+	        <h2>Resultados de la búsqueda para :<strong th:text="${query}"></strong> </h2>
+
+	       
+			<div class="contenedor_cerveza" th:if="${not cervezas.isEmpty()}">
+			    <ul>
+			        <li th:each="cerveza : ${cervezas}">
+			            <div class="cerveza">
+			                
+			                <!-- Contenedor de la imagen -->
+			                <div class="cerveza__imagen-container">
+			                    <img th:src="@{${cerveza.imagen}}" alt="Imagen de cerveza" class="cerveza__imagen"/>
+			                </div>
+
+			                <!-- Contenedor de la información -->
+			                <div class="cerveza__info">
+			                    <h3 th:text="${cerveza.nombre}"></h3>
+			                    
+
+			                    <!-- Detalles: IBU y Alcohol -->
+			                    <div class="cerveza__detalles">
+									<p th:text="'Estilo: ' + ${cerveza.estilo}"></p>
+			                        <p th:text="'IBU: ' + ${cerveza.IBU}"></p>
+			                        <p th:text="'Alcohol: ' + ${cerveza.alcohol}"></p>
+			                    </div>
+
+			                    <div>
+									<p class="descripcion" th:text=" ${cerveza.descripcion}"></p>
+								</div>
+								
+			                   
+			                </div>
+			            </div>
+			        </li>
+			    </ul>
+			</div>
+
+	        <!-- Si no se encuentran cervezas, mostrar mensaje -->
+	        <div th:if="${cervezas.isEmpty()}">
+	            <p>No se encontraron cervezas que coincidan con el término de búsqueda.</p>
+	        </div>
+	    </main>
+    
+
+    
+
+    
+
+
+
+    <footer class="footer">
+        <p class="footer__texto">&copy; 2025 Julian Sacristan - Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

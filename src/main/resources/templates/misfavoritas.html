@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Inicio</title>
+</head>
+<body>
+    <header class="header">
+        <a href="inicio.html" >
+			<img class="header__logo" th:src="@{/img/2.png}" alt="Logo">
+        </a>
+    </header>
+    <nav class="navegacion">
+        <ul>
+			<li><a class="navegacion__enlace navegacion__enlace--activo" href="/inicio">Inicio</a></li>
+			<li><a class="navegacion__enlace " href="/buscar">Buscar cerveza</a></li>
+			<li><a class="navegacion__enlace" href="/favoritas/misfavoritas">Mis Favoritas</a></li>
+			<li><a class="navegacion__enlace" href="/perfil">Mi Perfil</a></li>
+			<li><a  class="navegacion__enlace" href="/nuevaCerveza">Añadir Cerveza</a></li>
+			<li><a class="navegacion__enlace" href="/explorar">Explorar</a></li>
+			<li><a class="navegacion__enlace" href="/logout">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+    <main class="cervezas_favoritas">
+		<h2>Estas son tus cervezas favoritas!!!</h2>
+		<div th:each="cerveza : ${favoritas}" class="cerveza">
+		       <div class="cerveza__imagen-container">
+		           <img th:src="${cerveza.imagen}" alt="Imagen de [[${cerveza.nombre}]]" class="cerveza__imagen"/>
+		       </div>
+		       <div class="cerveza__info">
+		           <h3 th:text="${cerveza.nombre}">Nombre de la Cerveza</h3>
+		           <p>
+		               <span th:text="'Alcohol: ' + ${cerveza.alcohol} "></span> |
+		               <span th:text="'Brewery: ' + ${cerveza.cervecera}"></span>
+		           </p>
+		           <p class="descripcion" th:text="${cerveza.descripcion}">Descripción de la cerveza</p>
+				  
+				   
+		       </div>
+		   </div>
+	</main>
+	
+		
+    <footer class="footer">
+        <p class="footer__texto">&copy; 2025 Comunity Craft todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

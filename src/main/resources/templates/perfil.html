@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Mi Perfil</title>
+</head>
+<body>
+    <header class="header">
+        <a href="inicio.html">
+			<img class="header__logo" th:src="@{/img/2.png}" alt="logotipo">
+        </a>
+    </header>
+    <nav class="navegacion">
+        <ul>
+            <li><a class="navegacion__enlace navegacion__enlace--activo" href="/inicio">Inicio</a></li>
+            <li><a class="navegacion__enlace" href="/buscar">Buscar cerveza</a></li>
+            <li><a class="navegacion__enlace" href="/perfil">Mi Perfil</a></li>
+            <li><a class="navegacion__enlace" href="/nuevaCerveza">Añadir Cerveza</a></li>
+            <li><a class="navegacion__enlace" href="/explorar">Explorar</a></li>
+            <li><a class="navegacion__enlace" href="/logout">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+
+    
+    <main class="main-content">
+        <section class="perfil-container">
+			
+            <section class="perfil">
+				<div class="logo_perfil_container">
+							    
+							    
+							    
+							</div>
+                
+                <div class="perfil__info">
+                    <p><strong>Nombre:</strong> <span th:text="${usuario.nombre}">Juan</span></p>
+                    <p><strong>Apellido:</strong> <span th:text="${usuario.apellido}">Pérez</span></p>
+                    <p><strong>Correo:</strong> <span th:text="${usuario.email}">juanperez@example.com</span></p>
+                    <p><strong>Fecha de Nacimiento:</strong> <span th:text="${usuario.fechaNacimiento}">01/01/1990</span></p>
+                    
+                </div>
+            
+
+            
+			<section class="publicaciones">
+			    <h2> Publicaciones de <span th:text="${usuario.nombre}"></span> </h2>
+			   
+			    
+			    <div class="contenedor-publicaciones">
+			        <div th:each="publicacion : ${publicaciones}" class="publicacion">
+			            <img th:if="${publicacion.foto}" th:src="'data:image/png;base64,' + ${publicacion.foto}" alt="Imagen de la publicación" class="publicacion__foto"/>
+			            <p class="publicacion__descripcion">
+			                <span th:text="${publicacion.descripcion}">Descripción no disponible</span>
+			            </p>
+			            <p class="publicacion__compartida"><b>Foto compartida por: </b><span th:text="${publicacion.usuario.email}">juanperez@example.com</span></p>
+			            <p class="publicacion__fecha"><b>Publicado el:</b> <span th:text="${publicacion.fechaPublicacionFormatted}">01/01/2025</span></p>
+			            <form th:action="@{/eliminar/{id}(id=${publicacion.id})}" method="post">
+			                <input type="hidden" name="_method" value="delete" />
+			                <button type="submit">Eliminar</button>
+			            </form>
+			        </div>
+			    </div>
+				<form class="boton3" action="/publicacion/crear" method="post" enctype="multipart/form-data">
+							        <button class="boton2" type="submit">Crear Publicación</button>
+				</form>
+				</section>
+			
+
+        
+        <section class="cervezas_favoritas">
+			<div class="contenedor-header">
+						    <div class="logo_favoritas">
+						        <img class="header__logo"  th:src="@{/img/favoritas.png} " alt="logotipo">
+						    </div>
+						    <h2>Tus Frías Favoritas</h2>
+						    <div class="logo_favoritas">
+						        <img class="header__logo"  th:src="@{/img/favoritas.png}"  alt="logotipo">
+						    </div>
+						</div>
+						<div th:each="favorita : ${favoritas}" class="cerveza">
+						    <div class="cerveza__imagen-container">
+						        <img th:src="${favorita.cerveza.imagen}" alt="Imagen de [[${favorita.cerveza.nombre}]]" class="cerveza__imagen"/>
+						    </div>
+						    <div class="cerveza__info">
+						        <h3 th:text="${favorita.cerveza.nombre}">Nombre de la Cerveza</h3>
+						        <p class="cerveza_sub">
+						            <span><strong>Alcohol:</strong> <span th:text="${favorita.cerveza.alcohol}"></span></span> |
+						            <span><strong>Amargor:</strong> <span th:text="${favorita.cerveza.IBU}"></span></span> |
+						            <span><strong>Brewery:</strong> <span th:text="${favorita.cerveza.cervecera}"></span></span> 
+						        </p>
+						        <p class="descripcion" th:text="${favorita.cerveza.descripcion}">Descripción de la cerveza</p>
+
+						        <div class="estrella-puntuacion">
+						            <span th:each="i : ${#numbers.sequence(1,5)}"
+						                  th:text="${i <= favorita.valoracion} ? '★' : '☆'">☆</span>
+						        </div>
+								<form class="eliminar-favoritos" th:action="@{'/perfil/favoritas/eliminar/' + ${favorita.id}}" method="post">
+								    
+								    <button class="btn-favoritos" type="submit">Eliminar</button>
+								</form>
+						    </div>
+						</div>
+        </section>
+		</section>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__texto">&copy; 2025 Comunity Craft todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

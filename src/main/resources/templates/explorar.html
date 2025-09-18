@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Inicio</title>
+</head>
+<body>
+    <header class="header">
+        <a href="inicio.html" >
+            <img class="header__logo" src="img/2.png" alt="logotipo">
+        </a>
+    </header>
+	
+    <nav class="navegacion">
+        <ul>
+            <li><a class="navegacion__enlace navegacion__enlace--activo" href="/inicio">Inicio</a></li>
+            <li><a class="navegacion__enlace " href="/buscar">Buscar cerveza</a></li>
+            <li><a class="navegacion__enlace" href="/perfil">Mi Perfil</a></li>
+            <li><a  class="navegacion__enlace" href="/nuevaCerveza">Añadir Cerveza</a></li>
+            <li><a class="navegacion__enlace" href="/explorar">Explorar</a></li>
+			<li><a class="navegacion__enlace" href="/logout">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+    <main class="contenedor">
+        
+		<section class="usuarios">
+			<div class="logo_explora_container">
+				<div class="logo_explora">
+					<img class="header__logo" src="img/explora2.png" alt="logotipo">
+				</div>
+					<h2>Explorar los perfiles de cerveceros</h2>
+				<div class="logo_explora">
+					<img class="header__logo" src="img/explora2.png" alt="logotipo">
+				</div>
+			</div>
+		    <div class="usuarios-container">
+			    <table class="tabla-usuarios">
+			        <thead>
+			            <tr>
+			                <th class="col-name">Nombre</th>
+			                <th>Email</th>
+			                <th>Acción</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <tr th:each="usuario : ${usuarios}">
+			                <td class="col-name" th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></td>
+			                <td th:text="${usuario.email}"></td>
+			                <td>
+			                    <a th:if="${usuario.email} != ${miEmail}" th:href="@{'/perfil/' + ${usuario.email}}">
+			                        <button class="btn-ver">Ver Perfil</button>
+			                    </a>
+			                    <span th:if="${usuario.email} == ${miEmail}" class="yo-mismo">Este eres tú</span>
+			                </td>
+			            </tr>
+			        </tbody>
+			    </table>
+			    
+			    <!-- Nueva sección para la imagen -->
+			    <div class="imagen-reunidos">
+				    <img src="img/fondo3.png" alt="Gente bebiendo cerveza">
+			    </div>
+			</div>
+		</section>
+
+    </main>
+    <footer class="footer">
+        <p class="footer__texto">&copy; 2025 Comunity Craft todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Crear Publicación</title>
+</head>
+<body class="publicacion-page">
+    <div class="contenedor_centrado">
+        <div class="logo">
+            <img th:src="@{/img/2.png}" alt="Logo">
+        </div>
+        <div class="crear_form">
+            <h2 class="titulo_form">Crear Nueva Publicación</h2>
+
+            <form action="/publicacion/crear" method="post" enctype="multipart/form-data" class="publicacion-form">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" class="form-textarea" required></textarea><br>
+
+                <label for="foto" class="form-label">Foto:</label>
+                <input type="file" name="archivo" class="form-file" accept="image/*" />
+
+                <button type="submit" class="form-submit-btn">Crear Publicación</button>
+            </form>
+
+            <a class="navegacion__volver" href="/perfil">Vuelve a tu Perfil</a>
+        </div>
+    </div>
+</body>
+</html>

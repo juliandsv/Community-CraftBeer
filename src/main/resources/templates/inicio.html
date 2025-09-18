@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Inicio</title>
+</head>
+<body>
+    <header class="header">
+        <a href="" >
+            <img class="header__logo" src="img/2.png" alt="logotipo">
+        </a>
+    </header>
+    <nav class="navegacion">
+        <ul>
+			<li><a class="navegacion__enlace navegacion__enlace--activo" href="/inicio">Inicio</a></li>
+			<li><a class="navegacion__enlace " href="/buscar">Buscar cerveza</a></li>
+			<li><a class="navegacion__enlace" href="/perfil">Mi Perfil</a></li>
+			<li><a  class="navegacion__enlace" href="/nuevaCerveza">Añadir Cerveza</a></li>
+			<li><a class="navegacion__enlace" href="/explorar">Explorar</a></li>
+			<li><a class="navegacion__enlace" href="/logout">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+    <main class="contenedor">
+        
+        <div id="bienvenida">
+			<div class="logo_inicio_container">
+				 <div class="logo_inicio">
+					<img class="header__logo" src="img/homer1.png" alt="logotipo">
+				</div>
+					<h1>LA RED SOCIAL DE LOS AMANTES DE LA CERVEZA</h1>
+				<div class="logo_inicio">
+					<img class="header__logo" src="img/homer1.png" alt="logotipo">
+				</div>
+		</div>
+
+            <div class="grid-container">
+                <div class="section">
+                    <h2>🔍 Explora y Descubre</h2>
+                    <p>Busca cervezas en nuestra base de datos, consulta estilos, IBU, ABV y descripciones detalladas.</p>
+                </div>
+
+                 <div class="section">
+                    <h2>⭐ Añade a Favoritos</h2>
+                    <p>Guarda las cervezas que más te gustan en tu perfil para recordarlas y recomendarlas.</p>
+                </div>
+
+                <div class="section">
+                    <h2>📍 Comparte tu Experiencia</h2>
+                    <p>Publica fotos y comentarios disfrutando de una buena cerveza en tu cervecería favorita.</p>
+                </div>
+
+                <div class="section">
+                    <h2>🍺 Contribuye a la Comunidad</h2>
+                    <p>Añade nuevas cervezas a la base de datos y ayuda a que la comunidad tenga la mayor variedad posible.</p>
+                </div>
+
+                <div class="section">
+                    <h2>👍 Brinda con Otros Usuarios <span class="toast">🥂</span></h2>
+                    <p>Reacciona a publicaciones y reseñas con un brindis virtual.</p>
+                </div>
+
+                <div class="section">
+                    <h2>🔥 Crea tu Perfil Cervecero</h2>
+                 <p>Sigue a otros amantes de la cerveza, interactúa con sus publicaciones y crea tu historial cervecero.</p>
+                </div>
+            </div>
+       </div>
+
+       
+    </main>
+    <footer class="footer">
+        <p class="footer__texto">&copy; 2025 Comunity Craft todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

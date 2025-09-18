@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Inicio</title>
+</head>
+<body>
+    <header class="header">
+        <a href="inicio.html" >
+            <img class="header__logo" src="img/2.png" alt="logotipo">
+        </a>
+    </header>
+    <nav class="navegacion">
+        <ul>
+			<li><a class="navegacion__enlace navegacion__enlace--activo" href="/inicio">Inicio</a></li>
+			<li><a class="navegacion__enlace " href="/buscar">Buscar cerveza</a></li>
+			<li><a class="navegacion__enlace" href="/perfil">Mi Perfil</a></li>
+			<li><a  class="navegacion__enlace" href="/nuevaCerveza">Añadir Cerveza</a></li>
+			<li><a class="navegacion__enlace" href="/explorar">Explorar</a></li>
+			<li><a class="navegacion__enlace" href="/logout">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+	<main class="contenedor contenedor-flex">
+	    <section class="pautas">
+	        
+			<p>Subir una cerveza a nuestra plataforma es una excelente forma de compartir tu pasión por las cervezas artesanales. Para asegurarte de que tu cerveza se destaque y atraiga a otros usuarios, aquí tienes algunos consejos clave: asegúrate de que la imagen sea clara y bien iluminada, selecciona el estilo adecuado y escribe una descripción atractiva que resalte lo mejor de tu cerveza. No olvides incluir el IBU, el porcentaje de alcohol y el nombre correcto de la cervecera para que todos disfruten de la mejor experiencia.</p>
+	    </section>
+
+		<section class="formulario_cerveza">
+			<div class="contenedor-header">
+			    <div class="logo_botellas">
+			        <img class="header__logo" src="img/botellas.png" alt="logotipo">
+			    </div>
+			    <h2>Nueva Cerveza</h2>
+			    <div class="logo_botellas">
+			        <img class="header__logo" src="img/botellas.png" alt="logotipo">
+			    </div>
+			</div>
+		    
+		    <form class="form-nueva-cerveza" action="/nuevaCerveza" method="post" enctype="multipart/form-data">
+		        
+		        <div class="form-group">
+		            <label for="nombre">Nombre de la cerveza:</label>
+		            <input type="text" id="nombre" name="nombre" required>
+		        </div>
+
+		        <div class="form-group">
+		            <label for="cervecera">Cervecera:</label>
+		            <input type="text" id="cervecera" name="cervecera" required>
+		        </div>
+
+		        <div class="form-group">
+		            <label for="estilo">Estilo:</label>
+		            <select id="estilo" name="estilo" required>
+		                <option value="IPA">IPA</option>
+		                <option value="Lager">Lager</option>
+		                <option value="Trigo">Trigo</option>
+		                <option value="Negra">Negra</option>
+		                <option value="Roja">Roja</option>
+		                <option value="Sin gluten">Sin gluten</option>
+		                <option value="Sour">Sour</option>
+		                <option value="Belga">Belga</option>
+		                <option value="Sin alcohol">Sin alcohol</option>
+		                <option value="Sidra">Sidra</option>
+		            </select>
+		        </div>
+
+		        <div class="form-group">
+		            <label for="IBU">IBU:</label>
+		            <input type="text" id="IBU" name="IBU" required>
+		        </div>
+
+		        <div class="form-group">
+		            <label for="alcohol">Contenido alcohólico:</label>
+		            <input type="text" id="alcohol" name="alcohol" required>
+		        </div>
+
+		        <div class="form-group">
+		            <label for="descripcion">Descripción:</label>
+		            <textarea id="descripcion" name="descripcion" required></textarea>
+		        </div>
+
+		        <div class="form-group imagen">
+		            <label for="imagen">Imagen:</label>
+		            <input type="file" id="imagen" name="imagen" required>
+		        </div>
+
+		        <button type="submit">Subir Cerveza</button>
+		    </form>
+		</section>
+	</main>
+    <footer class="footer">
+        <p class="footer__texto">&copy; 2025 Comunity Craft todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

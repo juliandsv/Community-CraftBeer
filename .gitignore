@@ -1,0 +1,67 @@
+# --- EXISTENTE ---
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/. nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# --- AÑADIDOS RECOMENDADOS ---
+
+### Sistema operativo / miscelánea
+.DS_Store
+Thumbs.db
+
+### Logs y temporales
+*.log
+logs/
+*.tmp
+*.swp
+
+### Variables de entorno / secretos comunes
+.env
+.env.*
+*.keystore
+*.p12
+*.pem
+*.crt
+*.key
+
+### SPRING: NO subir properties reales (solo el example)
+# Ignora cualquier application.* real…
+/src/main/resources/application.properties
+/src/main/resources/application-*.properties
+/src/main/resources/application.yml
+/src/main/resources/application.yaml
+/src/main/resources/application-*.yml
+/src/main/resources/application-*.yaml
+
+# …pero SÍ sube el de ejemplo
+!/src/main/resources/application-example.properties

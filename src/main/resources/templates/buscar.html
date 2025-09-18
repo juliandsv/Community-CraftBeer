@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	
+    <title>Buscar</title>
+</head>
+<body>
+    <header class="header">
+		<span id="email" th:text="${usuario.email}" style="visibility: hidden; position: absolute;"></span>
+
+        <a href="inicio.html">
+            <img class="header__logo" src="img/2.png" alt="logotipo">
+        </a>
+    </header>
+    <nav class="navegacion">
+        <ul>
+			<li><a class="navegacion__enlace navegacion__enlace--activo" href="/inicio">Inicio</a></li>
+			<li><a class="navegacion__enlace " href="/buscar">Buscar cerveza</a></li>
+			<li><a class="navegacion__enlace" href="/perfil">Mi Perfil</a></li>
+			<li><a  class="navegacion__enlace" href="/nuevaCerveza">Añadir Cerveza</a></li>
+			<li><a class="navegacion__enlace" href="/explorar">Explorar</a></li>
+			<li><a class="navegacion__enlace" href="/logout">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+
+    <main class="contenedor_busqueda">
+        <form class="form_buscar" id="formBuscar">
+            <div class="buscador">
+                <input class="buscador__input" type="text" name="query" id="query" placeholder="🍺 Busca cerveza por nombre o estilo!">
+            </div>
+			
+            <button type="submit" class="buscador__boton">Buscar</button>
+        
+        <div id="resultados"></div>
+		<script>
+			document.getElementById("formBuscar").addEventListener("submit", function(event) {
+			    event.preventDefault(); // Evita recargar la página
+			    buscarCervezas();
+			});
+
+			function buscarCervezas() {
+			    const query = document.getElementById("query").value.trim();
+
+			    if (!query) {
+			        alert("Introduce un término de búsqueda.");
+			        return;
+			    }
+
+			    fetch(`http://localhost:8080/cervezas?query=${query}`)
+			        .then(response => {
+			            if (!response.ok) {
+			                throw new Error(`Error en la búsqueda: ${response.statusText}`);
+			            }
+			            return response.json();
+			        })
+			        .then(cervezas => {
+			            const resultadoDiv = document.getElementById("resultados");
+			            resultadoDiv.innerHTML = ""; // Limpiar resultados previos
+
+			            if (cervezas.length === 0) {
+			                resultadoDiv.innerHTML = "<p>No se encontraron cervezas.</p>";
+			                return;
+			            }
+
+			            cervezas.forEach(cerveza => {
+			                const cervezaHTML = `
+			                    <div class="cerveza">
+			                        <div class="cerveza__imagen-container">
+			                            <img src="${cerveza.imagen}" alt="Imagen de ${cerveza.nombre}" class="cerveza__imagen"/>
+			                        </div>
+			                        <div class="cerveza__info">
+			                            <h3>${cerveza.nombre}</h3>
+			                            <p class="sub_info"><strong> Alcohol</strong>:${cerveza.alcohol} | <strong>brewery</strong>: ${cerveza.cervecera} | <strong>Amargor</strong>: ${cerveza.ibu}</p>
+			                            <p class="descripcion">${cerveza.descripcion}</p>
+										<div class="estrellas" data-id="${cerveza.id}">
+										    <span data-value="1">&#9734;</span>
+										    <span data-value="2">&#9734;</span>
+										    <span data-value="3">&#9734;</span>
+										    <span data-value="4">&#9734;</span>
+										    <span data-value="5">&#9734;</span>
+										</div>
+										<input type="hidden" id="valoracion-${cerveza.id}" value="3" />
+										<button class="btn-favoritos" data-id="${cerveza.id}">Favorita</button>
+			                        </div>
+			                    </div>
+			                `;
+			                resultadoDiv.innerHTML += cervezaHTML;
+							activarEstrellas();
+			            });
+
+			            // Agregar el evento de favoritos a los botones después de cargar los resultados
+			            agregarEventosFavoritos();
+			        })
+			        .catch(error => console.error("Error al buscar cervezas:", error));
+			}
+
+			document.addEventListener("DOMContentLoaded", function () {
+			    // Llamamos a la función para agregar eventos a los botones de favoritos cuando se cargue la página
+			    agregarEventosFavoritos();
+			});
+
+			function agregarEventosFavoritos() {
+			    const userEmail = document.getElementById("email").textContent.trim();
+
+			    if (userEmail && userEmail !== "Invitado") {
+			        document.querySelectorAll('.btn-favoritos').forEach(button => {
+			            button.addEventListener('click', function () {
+			                const cervezaId = this.getAttribute('data-id');
+			                const valoracion = document.getElementById(`valoracion-${cervezaId}`).value;
+
+			                fetch(`http://localhost:8080/favoritas/guardar`, {
+			                    method: "POST",
+			                    headers: {
+			                        "Content-Type": "application/json"
+			                    },
+			                    body: JSON.stringify({
+			                        usuario: {
+			                            email: userEmail
+			                        },
+			                        cerveza: {
+			                            id: cervezaId
+			                        },
+			                        valoracion: valoracion
+			                    })
+			                })
+			                .then(response => {
+								if (response.ok) {
+								    mostrarModalFavorita();
+								} else {
+								    alert("Hubo un problema al agregar la cerveza a favoritas");
+								}
+			                })
+			                .catch(error => {
+			                    console.error('Error:', error);
+			                    alert("Hubo un problema al agregar la cerveza a favoritas.");
+			                });
+			            });
+			        });
+			    } else {
+			        document.querySelectorAll('.btn-favoritos').forEach(button => {
+			            button.addEventListener('click', function () {
+			                alert("Por favor, inicia sesión para agregar cervezas a favoritas.");
+			            });
+			        });
+			    }
+			}
+			function activarEstrellas() {
+			    document.querySelectorAll('.estrellas').forEach(div => {
+			        const estrellas = div.querySelectorAll('span');
+			        const id = div.dataset.id;
+			        const input = document.getElementById(`valoracion-${id}`);
+
+			        estrellas.forEach(star => {
+			            const valor = parseInt(star.dataset.value);
+
+			            // Hover visual
+			            star.addEventListener('mouseenter', () => {
+			                estrellas.forEach(s => {
+			                    const v = parseInt(s.dataset.value);
+			                    s.innerHTML = v <= valor ? '★' : '☆';
+			                });
+			            });
+
+			            // Salida del hover: volver a mostrar selección actual
+			            div.addEventListener('mouseleave', () => {
+			                const seleccion = parseInt(input.value);
+			                estrellas.forEach(s => {
+			                    const v = parseInt(s.dataset.value);
+			                    s.innerHTML = v <= seleccion ? '★' : '☆';
+			                });
+			            });
+
+			            // Clic: guardar y marcar
+			            star.addEventListener('click', () => {
+			                input.value = valor;
+			                estrellas.forEach(s => {
+			                    const v = parseInt(s.dataset.value);
+			                    s.innerHTML = v <= valor ? '★' : '☆';
+			                });
+			            });
+			        });
+			    });
+			}
+			function mostrarModalFavorita() {
+			    const modal = document.getElementById("modal-favorita");
+			    modal.classList.remove("hidden");
+			    modal.classList.add("show");
+
+			    setTimeout(() => {
+			        modal.classList.remove("show");
+			        modal.classList.add("hidden");
+			    }, 2000); // Se cierra solo a los 2 segundos
+			}
+
+		</script>
+		<div id="modal-favorita" class="modal hidden">
+		  <div class="modal-content">
+		    <p>🍺 Cerveza añadida a favoritas </p>
+		  </div>
+		</div>
+    
+
+		</form>
+	</main>
+
+    <footer class="footer">
+        <p class="footer__texto">&copy; 2025 Comunity CraftBeer - Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>
