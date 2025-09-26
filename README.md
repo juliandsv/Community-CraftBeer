@@ -48,7 +48,7 @@ mvn spring-boot:run
 
 ---
 
-##🔒 **Security**
+## 🔒 Security
 Este proyecto utiliza Spring Security con configuración manual (no se usa el login generado por defecto).
 
   1.Formulario de login personalizado: /login
@@ -59,7 +59,7 @@ Este proyecto utiliza Spring Security con configuración manual (no se usa el lo
 
 ---
 
-##✨ **Funcionalidades**
+## ✨ Funcionalidades
 
   🔑 Autenticación de usuarios (Spring Security)
   
