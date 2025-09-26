@@ -27,25 +27,28 @@ Los usuarios pueden **buscar y explorar cervezas**, **añadir nuevas cervezas a 
    ```bash
    git clone https://github.com/juliandsv/Community-CraftBeer.git
    cd Community-CraftBeer
-
+    ```
 ---
 
 2.**Configurar la base de datos:**
+ ```bash
 Copia el archivo: **src/main/resources/application-example.properties**
 y renómbralo como: **application.properties**
 Completa con tus credenciales locales de MySQL.
-
+```
 ---
 
 3.**Importar la base de datos inicial (100 cervezas):**
+ ```bash
 mysql -u TU_USUARIO -p -e "CREATE DATABASE IF NOT EXISTS beerdb CHARACTER SET utf8mb4;"
 mysql -u TU_USUARIO -p beerdb < db/beerdb_seed.sql
-
+ ```
 ---
 
 4.**Ejecutar la aplicación:**
+ ```bash
 mvn spring-boot:run
-
+ ```
 ---
 
 ## 🔒 Security
